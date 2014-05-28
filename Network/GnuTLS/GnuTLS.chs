@@ -43,10 +43,12 @@ module Network.GnuTLS.GnuTLS
      version, gnutlsGlobalInit 
     ) where
 
+import Control.Exception (catch)
+
 import Control.Concurrent
 import Data.Bits((.&.), (.|.))
 import Data.IORef(newIORef, readIORef)
-import Foreign
+import Foreign hiding (unsafePerformIO)
 import Foreign.C
 import qualified Foreign.Concurrent as FC
 import Foreign.Ptr
@@ -281,7 +283,7 @@ sock :: WriteAttr (Session t) Socket
 sock = writeAttr ss
     where rf sfd buf len err       = recv sfd buf len `catch` ef err
           sf sfd buf len err       = send sfd buf len `catch` ef err
-          ef err _                 = do (Errno iv) <- getErrno; poke err iv; return (-1)
+          ef err (_ :: IOError)    = do (Errno iv) <- getErrno; poke err iv; return (-1)
           ss (Session sfp sr) sfd  = do rf' <- newStablePtr $ rf sfd
                                         sf' <- newStablePtr $ sf sfd
                                         withForeignPtr sfp $ \p -> replace_transport_stable_ptrs p rf' sf'
@@ -292,7 +294,7 @@ handle :: WriteAttr (Session t) Handle
 handle = writeAttr ss
     where rf hdl buf len err       = (hGetBuf hdl buf (fromIntegral len)) `catch` ef err
           sf hdl buf len err       = (hPutBuf hdl buf (fromIntegral len) >> return len) `catch` ef err
-          ef err _                 = do (Errno iv) <- getErrno; poke err iv; return (-1)
+          ef err (_ :: IOError)    = do (Errno iv) <- getErrno; poke err iv; return (-1)
           ss (Session sfp sr) hdl  = do rf' <- newStablePtr $ rf hdl
                                         sf' <- newStablePtr $ sf hdl
                                         hSetBuffering hdl NoBuffering

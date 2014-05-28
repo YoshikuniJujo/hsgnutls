@@ -1,0 +1,27 @@
+#include <gnutls/gnutls.h>
+#ifdef COMPAT_GNUTLS_1_0
+typedef gnutls_cipher_algorithm gnutls_cipher_algorithm_t;
+typedef gnutls_kx_algorithm gnutls_kx_algorithm_t;
+typedef gnutls_mac_algorithm gnutls_mac_algorithm_t;
+typedef gnutls_digest_algorithm gnutls_digest_algorithm_t;
+typedef gnutls_datum gnutls_datum_t;
+typedef gnutls_params_type gnutls_params_type_t;
+typedef gnutls_credentials_type gnutls_credentials_type_t;
+typedef gnutls_compression_method gnutls_compression_method_t;
+typedef gnutls_connection_end gnutls_connection_end_t;
+typedef gnutls_alert_level gnutls_alert_level_t;
+typedef gnutls_alert_description gnutls_alert_description_t;
+typedef gnutls_handshake_description gnutls_handshake_description_t;
+typedef gnutls_certificate_status gnutls_certificate_status_t;
+typedef gnutls_certificate_request gnutls_certificate_request_t;
+typedef gnutls_openpgp_key_status gnutls_openpgp_key_status_t;
+typedef gnutls_close_request gnutls_close_request_t;
+typedef gnutls_protocol_version gnutls_protocol_t;
+typedef gnutls_certificate_type gnutls_certificate_type_t;
+typedef gnutls_x509_crt_fmt gnutls_x509_crt_fmt_t;
+typedef gnutls_pk_algorithm gnutls_pk_algorithm_t;
+typedef gnutls_sign_algorithm gnutls_sign_algorithm_t;
+#endif
+
+
+

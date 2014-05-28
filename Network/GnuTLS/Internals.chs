@@ -69,7 +69,7 @@ typedef gnutls_sign_algorithm gnutls_sign_algorithm_t;
 ----------------------------   Time Management   -------------------------------
 --------------------------------------------------------------------------------
 
-integralToClockTime :: Integral n => n -> ClockTime
+integralToClockTime :: (Integral n, Show n) => n -> ClockTime
 integralToClockTime ct = TOD (fromIntegral ct) 0
 
 --------------------------------------------------------------------------------
@@ -94,20 +94,20 @@ withSession (Session s _) = withForeignPtr s
 {-# SPECIALIZE throwGnutlsIf :: CInt  -> IO () #-}
 {-# SPECIALIZE throwGnutlsIf :: CLong -> IO () #-}
 
-throwGnutlsIf :: Integral n => n -> IO ()
+throwGnutlsIf :: (Integral n, Show n) => n -> IO ()
 throwGnutlsIf 0     = return ()
 throwGnutlsIf v     = {#call gnutls_strerror #} (fromIntegral v) >>= safePeekCString >>= (\str -> fail (str++" ("++show v++")"))
 
 {-# SPECIALIZE throwGnutlsIfNeg :: CInt  -> IO Int #-}
 {-# SPECIALIZE throwGnutlsIfNeg :: CLong -> IO Int #-}
-throwGnutlsIfNeg :: (Num b, Integral a) => a -> IO b
+throwGnutlsIfNeg :: (Num b, Integral a, Show a) => a -> IO b
 throwGnutlsIfNeg v = if v < 0 then throwGnutlsIf v >> return 0 else return (fromIntegral v)
 
 {-# INLINE peekEnum #-}
 peekEnum :: (Storable s, Integral s, Num e, Enum e) => Ptr s -> IO e
 peekEnum pointer = peek pointer >>= return . fromIntegral
 
-isZero, isNonZero :: (Num a) => a -> Bool
+isZero, isNonZero :: (Num a, Eq a) => a -> Bool
 isZero x = x == 0
 isNonZero x = x /= 0
 

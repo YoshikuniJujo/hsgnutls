@@ -1,0 +1,2 @@
+C->Haskell Interface Version C->Haskell Compiler, version 0.16.5 Crystal Seed, 24 Jan 2009
+([((False,"gcry_cipher_hd_t"),("Ptr (CipherHandle)","Ptr (CipherHandle)"))],[("CipherHandle",Pointer {ptrTypeHO = ForeignPtr, isNewtypeHO = True})])
