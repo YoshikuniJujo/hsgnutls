@@ -20,14 +20,18 @@ Description:    hsgnutls is a wrapper to the GNU TLS Library.
 Homepage:       http://www.cs.helsinki.fi/u/ekarttun/hsgnutls
 
 Build-Type:     Simple
-Build-Depends:  base>3, mtl, old-time, bytestring>0.9
-Tested-With:    GHC==6.8.2
+cabal-version:	>=1.8
+Tested-With:    GHC==7.6.3
 
-extra-libraries: gnutls, gcrypt
+library
 
-c-sources:       helpers.c, crypt_helpers.c
+    Build-Depends:  base>3, mtl, old-time, bytestring>0.9
 
-Exposed-Modules: Network.GnuTLS,
+    extra-libraries: gnutls, gcrypt
+
+    c-sources:       helpers.c, crypt_helpers.c
+
+    Exposed-Modules: Network.GnuTLS,
                  Network.GnuTLS.Attributes,
                  Network.GnuTLS.GnuTLSMonad,
                  Network.GnuTLS.Errors,
@@ -36,12 +40,12 @@ Exposed-Modules: Network.GnuTLS,
                  Codec.Encryption,
                  Codec.Encryption.Ciphers
 
-Other-Modules:   Network.GnuTLS.GnuTLS,
+    Other-Modules:   Network.GnuTLS.GnuTLS,
                  Network.GnuTLS.Internals,
                  Network.GnuTLS.IOWrap,
                  Network.GnuTLS.RefCount
 
-Extensions:      FunctionalDependencies,
+    Extensions:      FunctionalDependencies,
                  ForeignFunctionInterface,
                  TypeSynonymInstances,
                  FlexibleInstances,
@@ -50,3 +54,12 @@ Extensions:      FunctionalDependencies,
                  FlexibleContexts,
                  EmptyDataDecls,
                  PatternSignatures
+
+source-repository	head
+    type:	git
+    location:	git://github.com/YoshikuniJujo/hsgnutls.git
+
+source-repository	this
+    type:	git
+    location:	git://github.com/YoshikuniJujo/hsgnutls.git
+    tag:	0.2.3.3
