@@ -1,2 +1,0 @@
-C->Haskell Interface Version C->Haskell Compiler, version 0.16.5 Crystal Seed, 24 Jan 2009
-([((False,"gnutls_x509_privkey_t"),("Ptr (PrivateKey)","Ptr (PrivateKey)")),((False,"gnutls_x509_crl_t"),("Ptr (CertificateRevocationList)","Ptr (CertificateRevocationList)")),((False,"gnutls_x509_crt_t"),("Ptr (Certificate)","Ptr (Certificate)"))],[("PrivateKey",Pointer {ptrTypeHO = ForeignPtr, isNewtypeHO = True}),("Certificate",Pointer {ptrTypeHO = ForeignPtr, isNewtypeHO = True}),("CertificateRevocationList",Pointer {ptrTypeHO = ForeignPtr, isNewtypeHO = True})])
